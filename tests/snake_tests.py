@@ -1,5 +1,5 @@
-from ..snake.snake import Snake
-from ..snake.constants import *
+from snake.snake import Snake
+from snake.constants import *
 
 def test_update_direction1():
     snake = Snake()
@@ -86,4 +86,11 @@ def test_move8():
     snake = Snake(init_body=[[8,2],[9,2]], init_direction=DOWN)
     check = snake.move(5, 10)
     assert(check == -1)
+    
+# Ate an Apple    
+def test_move9():
+    snake = Snake(init_body=[[7,2],[7,3]], init_direction=RIGHT)
+    check = snake.move(5, 10,tuple([7,4]))
+    assert(check == 1)
+    assert(snake.body == [[7,2],[7,3],[7,4]])
 

@@ -1,8 +1,8 @@
-from .constants import *
-from ..utils.list_manipulation import add_arrays
+from snake.constants import *
+from utils.list_manipulation import add_arrays
 
 class Snake:
-    def __init__(self, init_body=[[0,0],[0,1],[0,2],[0,3]],init_direction=RIGHT):
+    def __init__(self, init_body=[[0,0],[0,1],[0,2],[0,3],[0,4]],init_direction=RIGHT):
         # First element in the array is the tail of the snake
         # Last element in the array is the head of the snake
         # By default, set this to be right
@@ -13,7 +13,7 @@ class Snake:
     def update_pos(self, position):
         self.body = self.body[1:] + [position]
     
-    def move(self, upper_width, upper_height):
+    def move(self, upper_width, upper_height, apple_pos=None):
         # Get the current direction, and move in that way
         dir = self.direction
         cur_head = self.head()
@@ -21,7 +21,13 @@ class Snake:
         if ((new_head[0] >= upper_height or new_head[0] < 0) or 
             (new_head[1] >= upper_width or new_head[1] < 0)):
             return -1
-        self.update_pos(new_head)
+
+        if tuple(new_head) == apple_pos:
+            # We have ate the apple, snake gets extended
+            self.body = self.body + [new_head]
+        else:
+            # We have not ate the aple, update position like usual
+            self.update_pos(new_head)
         return 1
             
     def update_direction(self, direction):
