@@ -2,6 +2,7 @@ README.md
 setup.py
 snake/__init__.py
 snake/apple.py
+snake/constants.py
 snake/game.py
 snake/snake.py
 snake.egg-info/PKG-INFO
